@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public int magicPoint;
     public bool ChoosingShootDir;
     public bool CanNotMove;
-    float speed = 0.1f;
+    float speed = 0.04f;
     float TopTextStartTime;
 
 
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         targetPos = transform.position;
         ChoosingShootDir = false;
         CanNotMove = false;
-        blood = 2400;
+        blood = 1400;
         magicPoint = 0;
         TopText.text = "";
         InvokeRepeating("increaseMagicPoint", 0f, 2f);

@@ -781,6 +781,8 @@ MonoBehaviour:
   TopText: {fileID: 2109933629}
   blood: 0
   CanNotMove: 0
+  magicPoint: 0
+  cube: {fileID: 6444897739255427511, guid: a69e121ba8b748343998dc4121b6a3fb, type: 3}
 --- !u!136 &372686692
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -943,7 +945,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 2400
+  m_MaxValue: 1400
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -1242,6 +1244,7 @@ MonoBehaviour:
   - 
   - 
   circle: {fileID: 2923087110589593516, guid: baf747f3472fff449aea6fde8c567379, type: 3}
+  enemy_circle: {fileID: 5778563748038006073, guid: 98c2a0a35bb8d0448902b039da75b7a6, type: 3}
   incendio: {fileID: 610079952661681327, guid: cba6b640b3e750340ae2b804bb84a15e, type: 3}
   atmos: {fileID: 3423815877664304842, guid: d890af1811ec63345a56c5d5de4688a8, type: 3}
   expul: {fileID: 4177132557874788932, guid: 10ea02a858c2be947abf2fbf0a3de134, type: 3}
@@ -2251,7 +2254,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 2400
+  m_MaxValue: 1400
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:

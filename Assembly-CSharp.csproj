@@ -57,11 +57,13 @@
     <Compile Include="Assets\Scripts\AtmosScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ExpulScript.cs" />
+    <Compile Include="Assets\Scripts\SpellScript.cs" />
     <Compile Include="Assets\Scripts\Spells.cs" />
     <Compile Include="Assets\Scripts\Circle.cs" />
     <Compile Include="Assets\Scripts\IncenScript.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
-    <Compile Include="Assets\Scripts\SpellScript.cs" />
+    <Compile Include="Assets\Scripts\ECircle.cs" />
+    <Compile Include="Assets\CubeScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

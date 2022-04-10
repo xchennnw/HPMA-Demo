@@ -7,18 +7,21 @@ public class Circle : MonoBehaviour
     Plane plane = new Plane(Vector3.up, 0);
     float timeNotMove;
     public Vector3 buttonPos;
+    public int buttonIndex;
     public int SpellIndex;
     public int SpellMP;
     public int SpellToKill;
     Spells SpellScript;
     PlayerController PlayerScript;
-   
+    ButtonController ButtonScript;
+
     // Start is called before the first frame update
     void Start()
     {
         timeNotMove = Time.time + 1.4f;
         GameObject s = GameObject.Find("SpellManager");
         SpellScript = s.GetComponent<Spells>();
+        ButtonScript = s.GetComponent<ButtonController>();
         GameObject p = GameObject.Find("Player");
         PlayerScript = p.GetComponent<PlayerController>();
 
@@ -50,9 +53,10 @@ public class Circle : MonoBehaviour
                 {                   
                     SpellScript.execSpell(v, SpellIndex, SpellToKill);
                 }
-                if (!(v.x <= buttonPos.x + 4 && v.x >= buttonPos.x - 4 && v.z <= buttonPos.z - 1 && v.z >= buttonPos.z - 12))
+                if (!(v.x <= buttonPos.x + 5 && v.x >= buttonPos.x - 5&& v.z <= buttonPos.z && v.z >= buttonPos.z - 13))
                 {
                     PlayerScript.magicPoint -= SpellMP;
+                    ButtonScript.setCurrSpells(buttonIndex);
                 }
                 PlayerScript.ChoosingShootDir = false;
                 Destroy(this.gameObject);               
@@ -61,3 +65,4 @@ public class Circle : MonoBehaviour
         }
     }
 }
+

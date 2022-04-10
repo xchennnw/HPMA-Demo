@@ -7,6 +7,7 @@ public class Spells : MonoBehaviour
     public int[] mList = new int[5];
     public string[] sList = new string[5];
     public GameObject circle;
+    public GameObject enemy_circle;
     public GameObject incendio;
     public GameObject atmos;
     public GameObject expul;
@@ -47,83 +48,69 @@ public class Spells : MonoBehaviour
         return sList[i];
     }
 
-    public void useSpell(Vector3 buttonPos, int n, int toKill)
+    public void useSpell(Vector3 buttonPos, int n, int toKill, int btn_index)
     {
+        float r = 0;
         if(n == 0)
         {
-            useIncendio(buttonPos, toKill);
+            r = 10f;
         }
         else if (n == 1)
         {
-            useAtmospheric(buttonPos, toKill);
+            r = 10f;
         }
         else if (n == 2)
         {
-            useExpulso(buttonPos, toKill);
+            r = 8f;
         }
+        
+        if(toKill == 1)
+        {
+            var o = Instantiate(circle, buttonPos, Quaternion.identity);
+            o.transform.localScale = new Vector3(r, 1f, r);
+            o.GetComponent<Circle>().buttonPos = buttonPos;
+            o.GetComponent<Circle>().buttonIndex = btn_index;
+            o.GetComponent<Circle>().SpellIndex = n;
+            o.GetComponent<Circle>().SpellMP = getMagicValue(n);
+            o.GetComponent<Circle>().SpellToKill = toKill;
+        }
+        else
+        {
+            var o = Instantiate(enemy_circle, buttonPos, Quaternion.identity);
+            o.transform.localScale = new Vector3(r, 1f, r);
+            o.GetComponent<ECircle>().SpellIndex = n;
+            o.GetComponent<ECircle>().SpellMP = getMagicValue(n);
+            o.GetComponent<ECircle>().SpellToKill = toKill;
+        }
+        
+  
+
     }
     public void execSpell(Vector3 execPos, int n, int toKill)
     {
+        
         if (n == 0)
         {
-            execIncendio(execPos, toKill);
+            Vector3 pos = new Vector3(execPos.x, 2f, execPos.z);
+            var o = Instantiate(incendio, pos, Quaternion.identity);
+            o.GetComponent<IncenScript>().toKill = toKill;
         }
         else if (n == 1)
         {
-            execAtmospheric(execPos, toKill);
+            Vector3 pos = new Vector3(execPos.x, 13f, execPos.z);
+            var o = Instantiate(atmos, pos, Quaternion.identity);
+            o.GetComponent<AtmosScript>().toKill = toKill;
         }
         else if (n == 2)
         {
-            execExpulso(execPos, toKill);
+            Vector3 pos = new Vector3(execPos.x, 2f, execPos.z);
+            var o = Instantiate(expul, pos, Quaternion.identity);
+            o.GetComponent<ExpulScript>().toKill = toKill;
         }
+
+       
     }
 
-    void useIncendio(Vector3 buttonPos, int toKill)
-    {
-        var o = Instantiate(circle, buttonPos, Quaternion.identity);
-        o.transform.localScale = new Vector3(10f, 1f, 10f);
-        o.GetComponent<Circle>().buttonPos = buttonPos;
-        o.GetComponent<Circle>().SpellIndex = 0;
-        o.GetComponent<Circle>().SpellMP = getMagicValue(0);
-        o.GetComponent<Circle>().SpellToKill = toKill;
-    }
-    void execIncendio(Vector3 execPos, int toKill)
-    {
-        Vector3 pos = new Vector3(execPos.x, 2f, execPos.z);
-        var o = Instantiate(incendio, pos, Quaternion.identity);
-        o.GetComponent<IncenScript>().toKill = toKill;
-    }
 
-    void useAtmospheric(Vector3 buttonPos, int toKill)
-    {
-        var o = Instantiate(circle, buttonPos, Quaternion.identity);
-        o.transform.localScale = new Vector3(10f, 1f, 10f);
-        o.GetComponent<Circle>().buttonPos = buttonPos;
-        o.GetComponent<Circle>().SpellIndex = 1;
-        o.GetComponent<Circle>().SpellMP = getMagicValue(1);
-        o.GetComponent<Circle>().SpellToKill = toKill;
-    }
-    void execAtmospheric(Vector3 execPos, int toKill)
-    {
-        Vector3 pos = new Vector3(execPos.x, 13f, execPos.z);
-        var o = Instantiate(atmos, pos, Quaternion.identity);
-        o.GetComponent<AtmosScript>().toKill = toKill;
-    }
-
-    void useExpulso(Vector3 buttonPos, int toKill)
-    {
-        var o = Instantiate(circle, buttonPos, Quaternion.identity);
-        o.transform.localScale = new Vector3(8f, 1f, 8f);
-        o.GetComponent<Circle>().buttonPos = buttonPos;
-        o.GetComponent<Circle>().SpellIndex = 2;
-        o.GetComponent<Circle>().SpellMP = getMagicValue(2);
-        o.GetComponent<Circle>().SpellToKill = toKill;
-    }
-    void execExpulso(Vector3 execPos, int toKill)
-    {
-        Vector3 pos = new Vector3(execPos.x, 2f, execPos.z);
-        var o = Instantiate(expul, pos, Quaternion.identity);
-        o.GetComponent<ExpulScript>().toKill = toKill;
-    }
 }
 

@@ -23,14 +23,19 @@ public class ButtonController : MonoBehaviour
         SpellScript = s.GetComponent<Spells>();
         GameObject p = GameObject.Find("Player");
         PlayerScript = p.GetComponent<PlayerController>();
+
+        curr[0] = 0;
+        curr[1] = 1;
+        curr[2] = 2;
+        curr[3] = 1;
+        setButtonText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        setCurrSpells();
-        setButtonText();
         setColors();
+        setButtonText();
     }
 
     void OnEnable()
@@ -42,16 +47,20 @@ public class ButtonController : MonoBehaviour
         button4.onClick.AddListener(() => buttonCallBack(button4));
     }
 
-    void setCurrSpells()
+    public void setCurrSpells(int x)
     {
+        
+        int n = curr.Length;
+        for(int i=x; i<n-1; i++)
+        {
+            curr[i] = curr[i + 1];
+        }
+        curr[n - 1] = Random.Range(0, 3);
+        setButtonText();
 
-        curr[0] = 0;
-        curr[1] = 1;
-        curr[2] = 2;
-        curr[3] = 1;
 
     }
-    void setButtonText()
+    public void setButtonText()
     {
         button1.GetComponentInChildren<Text>().text = SpellScript.getName(curr[0]) + " (" +
            SpellScript.getMagicValue(curr[0])+")";
@@ -98,7 +107,7 @@ public class ButtonController : MonoBehaviour
             if(SpellScript.getMagicValue(curr[0]) <= m)
             {
                 buttonPos = new Vector3(-15f, 4f, -27f);
-                SpellScript.useSpell(buttonPos, curr[0], 1);
+                SpellScript.useSpell(buttonPos, curr[0], 1, 0);
             }                     
         }
         if (buttonPressed == button2)
@@ -106,7 +115,7 @@ public class ButtonController : MonoBehaviour
             if (SpellScript.getMagicValue(curr[1]) <= m)
             {
                 buttonPos = new Vector3(-5f, 4f, -27f);
-                SpellScript.useSpell(buttonPos, curr[1], 1);
+                SpellScript.useSpell(buttonPos, curr[1], 1, 1);
             }
         }
 
@@ -115,7 +124,7 @@ public class ButtonController : MonoBehaviour
             if (SpellScript.getMagicValue(curr[2]) <= m)
             {
                 buttonPos = new Vector3(5f, 4f, -27f);
-                SpellScript.useSpell(buttonPos, curr[2], 1);
+                SpellScript.useSpell(buttonPos, curr[2], 1, 2);
             }               
         }
 
@@ -124,7 +133,7 @@ public class ButtonController : MonoBehaviour
             if (SpellScript.getMagicValue(curr[3]) <= m)
             {
                 buttonPos = new Vector3(15f, 4f, -27f);
-                SpellScript.useSpell(buttonPos, curr[3], 1);
+                SpellScript.useSpell(buttonPos, curr[3], 1, 3);
             }               
         }
     }
